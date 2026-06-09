@@ -209,7 +209,7 @@ bool BufferPoolManager::DeletePage(PageId page_id) {
     free_list_.push_back(frame_id);
 
     // 从replacer中移除
-    replacer_->pin(frame_id);
+    replacer_->Pin(frame_id);
 
     disk_manager_->DeallocatePage(page_id.page_no);
     return true;
