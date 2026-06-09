@@ -14,7 +14,7 @@ RmScan::RmScan(const RmFileHandle *file_handle) : file_handle_(file_handle) {
     rid_.slot_no = -1;
 
     // 如果没有数据页，直接设为结束
-    if (rid_.page_no >= file_handle_->get_file_hdr().num_pages) {
+    if (rid_.page_no >= file_handle_->file_hdr_.num_pages) {
         rid_.page_no = RM_NO_PAGE;
         rid_.slot_no = -1;
         return;
@@ -28,7 +28,7 @@ RmScan::RmScan(const RmFileHandle *file_handle) : file_handle_(file_handle) {
  * @brief 找到文件中下一个存放了记录的位置
  */
 void RmScan::next() {
-    RmFileHdr file_hdr = file_handle_->get_file_hdr();
+    RmFileHdr file_hdr = file_handle_->file_hdr_;
 
     // 遍历所有page
     while (rid_.page_no < file_hdr.num_pages) {
